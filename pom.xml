@@ -12,7 +12,7 @@
 	<artifactId>rest-spring-boot-and-java-erudio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>rest-spring-boot-and-java-erudio</name>
-	<description>Demo project for Spring Boot</description>
+	<description>First Steps in Spring</description>
 	<properties>
 		<java.version>20</java.version>
 	</properties>
