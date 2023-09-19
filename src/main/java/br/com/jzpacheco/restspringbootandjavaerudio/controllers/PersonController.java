@@ -1,4 +1,4 @@
-package br.com.jzpacheco.restspringbootandjavaerudio;
+package br.com.jzpacheco.restspringbootandjavaerudio.controllers;
 
 import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.UnsupportedMathOperationException;
 import br.com.jzpacheco.restspringbootandjavaerudio.model.Person;
