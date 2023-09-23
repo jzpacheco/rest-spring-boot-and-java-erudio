@@ -2,6 +2,7 @@ package br.com.jzpacheco.restspringbootandjavaerudio.controllers;
 
 import br.com.jzpacheco.restspringbootandjavaerudio.services.PersonServices;
 import br.com.jzpacheco.restspringbootandjavaerudio.vo.v1.PersonVO;
+import br.com.jzpacheco.restspringbootandjavaerudio.vo.v2.PersonVOV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,13 @@ public class PersonController {
                  produces = MediaType.APPLICATION_JSON_VALUE)
     public PersonVO create(@RequestBody PersonVO person){
         return personServices.create(person);
+    }
+
+    @PostMapping(value = "/v2",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public PersonVOV2 createV2(@RequestBody PersonVOV2 person){
+        return personServices.createV2(person);
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE,

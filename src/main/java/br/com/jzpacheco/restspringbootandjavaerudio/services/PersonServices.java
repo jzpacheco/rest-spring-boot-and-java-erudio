@@ -2,9 +2,11 @@ package br.com.jzpacheco.restspringbootandjavaerudio.services;
 
 import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.ResourceNotFoundException;
 import br.com.jzpacheco.restspringbootandjavaerudio.mapper.DozerMapper;
+import br.com.jzpacheco.restspringbootandjavaerudio.mapper.custom.PersonMapper;
 import br.com.jzpacheco.restspringbootandjavaerudio.model.Person;
 import br.com.jzpacheco.restspringbootandjavaerudio.repositories.PersonRepository;
 import br.com.jzpacheco.restspringbootandjavaerudio.vo.v1.PersonVO;
+import br.com.jzpacheco.restspringbootandjavaerudio.vo.v2.PersonVOV2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,13 @@ public class PersonServices {
         Person entity = DozerMapper.parseObject(personVO, Person.class);
 
         return DozerMapper.parseObject(repository.save(entity),PersonVO.class);
+    }
+
+    public PersonVOV2 createV2(PersonVOV2 personVO){
+        logger.info("Inserting person with V2");
+        Person entity = PersonMapper.convertVoToEntity(personVO);
+
+        return PersonMapper.convertEntityToVO(repository.save(entity));
     }
 
     public PersonVO update(PersonVO person){
