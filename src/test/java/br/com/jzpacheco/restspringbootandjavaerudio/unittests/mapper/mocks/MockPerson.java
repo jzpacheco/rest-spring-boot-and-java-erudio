@@ -1,10 +1,10 @@
-package br.com.erudio.unittests.mapper.mocks;
+package br.com.jzpacheco.restspringbootandjavaerudio.unittests.mapper.mocks;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.erudio.data.vo.v1.PersonVO;
-import br.com.erudio.model.Person;
+import br.com.jzpacheco.restspringbootandjavaerudio.vo.v1.PersonVO;
+import br.com.jzpacheco.restspringbootandjavaerudio.model.Person;
 
 public class MockPerson {
 
