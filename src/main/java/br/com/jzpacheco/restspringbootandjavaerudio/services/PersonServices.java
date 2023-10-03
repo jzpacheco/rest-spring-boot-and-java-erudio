@@ -1,6 +1,7 @@
 package br.com.jzpacheco.restspringbootandjavaerudio.services;
 
 import br.com.jzpacheco.restspringbootandjavaerudio.controllers.PersonController;
+import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.RequiredObjectIsNullException;
 import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.ResourceNotFoundException;
 import br.com.jzpacheco.restspringbootandjavaerudio.mapper.DozerMapper;
 import br.com.jzpacheco.restspringbootandjavaerudio.model.Person;
@@ -43,6 +44,9 @@ public class PersonServices {
     }
 
     public PersonVO create(PersonVO personVO){
+
+        if (personVO == null) throw new RequiredObjectIsNullException();
+
         logger.info("Inserting person");
         Person entity = DozerMapper.parseObject(personVO, Person.class);
 
@@ -52,6 +56,9 @@ public class PersonServices {
     }
 
     public PersonVO update(PersonVO person){
+
+        if (person == null) throw new RequiredObjectIsNullException();
+
         Person entity = repository.findById(person.getKey()).orElseThrow(() -> new ResourceNotFoundException("No record found this id"));
 
         entity.setFirstName(person.getFirstName());
