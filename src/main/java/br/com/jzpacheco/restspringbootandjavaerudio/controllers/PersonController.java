@@ -23,7 +23,7 @@ public class PersonController {
                         MediaType.APPLICATION_YML})
     public PersonVO findById(
             @PathVariable(value = "id") Long id
-    ) throws Exception{
+    ) {
 
         return personServices.findById(id);
     }
