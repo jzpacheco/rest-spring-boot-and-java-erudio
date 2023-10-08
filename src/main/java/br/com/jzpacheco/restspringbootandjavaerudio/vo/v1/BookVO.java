@@ -8,7 +8,7 @@ import org.springframework.hateoas.RepresentationModel;
 import java.util.Date;
 import java.util.Objects;
 
-@JsonPropertyOrder({"id,key,author,lauch_date,price,title"})
+@JsonPropertyOrder({"id","author","launch_date","price","title"})
 public class BookVO extends RepresentationModel<BookVO> {
 
     @JsonProperty("id")
@@ -16,7 +16,7 @@ public class BookVO extends RepresentationModel<BookVO> {
     private Integer key;
     private String author;
     private Date launch_date;
-    private Long price;
+    private Double price;
     private String title;
 
     public BookVO(){};
@@ -45,11 +45,11 @@ public class BookVO extends RepresentationModel<BookVO> {
         this.launch_date = launch_date;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
