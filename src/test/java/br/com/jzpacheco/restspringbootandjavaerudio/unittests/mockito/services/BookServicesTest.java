@@ -1,9 +1,10 @@
-package br.com.jzpacheco.restspringbootandjavaerudio.services;
+package br.com.jzpacheco.restspringbootandjavaerudio.unittests.mockito.services;
 
 import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.RequiredObjectIsNullException;
 import br.com.jzpacheco.restspringbootandjavaerudio.model.Book;
 import br.com.jzpacheco.restspringbootandjavaerudio.model.Person;
 import br.com.jzpacheco.restspringbootandjavaerudio.repositories.BookRepository;
+import br.com.jzpacheco.restspringbootandjavaerudio.services.BookServices;
 import br.com.jzpacheco.restspringbootandjavaerudio.unittests.mapper.mocks.MockBook;
 import br.com.jzpacheco.restspringbootandjavaerudio.vo.v1.BookVO;
 import br.com.jzpacheco.restspringbootandjavaerudio.vo.v1.PersonVO;
