@@ -13,9 +13,12 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String author;
-    private Date launch_date;
-    private Long price;
 
+    @Temporal(TemporalType.DATE)
+    private Date launch_date;
+    private Double price;
+
+    @Column(nullable = false,length = 255)
     private String title;
 
     public Book() {
@@ -45,11 +48,11 @@ public class Book {
         this.launch_date = launch_date;
     }
 
-    public Long getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
