@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+//@CrossOrigin
 @RestController
 @RequestMapping("/api/person/v1")
 @Tag(name= "People", description = "Endpoints for Managing People ")
@@ -24,6 +25,7 @@ public class PersonController {
     private PersonServices personServices;
     private static final AtomicLong counter = new AtomicLong();
 
+    @CrossOrigin(origins = "https://localhost:8080")
     @GetMapping(value="/{id}",
                 produces = {MediaType.APPLICATION_JSON,
                         MediaType.APPLICATION_XML,
