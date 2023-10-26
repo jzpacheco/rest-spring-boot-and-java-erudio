@@ -10,7 +10,7 @@ import java.util.Objects;
 public class Permission implements GrantedAuthority {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @Column
     private String description;
@@ -23,11 +23,11 @@ public class Permission implements GrantedAuthority {
         return this.description;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
