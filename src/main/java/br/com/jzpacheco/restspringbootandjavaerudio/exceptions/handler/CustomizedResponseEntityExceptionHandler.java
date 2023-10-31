@@ -1,6 +1,7 @@
 package br.com.jzpacheco.restspringbootandjavaerudio.exceptions.handler;
 
 import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.ExceptionResponse;
+import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.InvalidJwtAuthenticationException;
 import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.RequiredObjectIsNullException;
 import br.com.jzpacheco.restspringbootandjavaerudio.exceptions.ResourceNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -28,8 +29,13 @@ public class CustomizedResponseEntityExceptionHandler extends ResponseEntityExce
         return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
     }
     @ExceptionHandler(RequiredObjectIsNullException.class)
-    public final ResponseEntity<ExceptionResponse> handleBadResquestException(Exception ex, WebRequest request){
+    public final ResponseEntity<ExceptionResponse> handleBadRequestException(Exception ex, WebRequest request){
         ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),request.getDescription(false));
         return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
+    @ExceptionHandler(InvalidJwtAuthenticationException.class)
+    public final ResponseEntity<ExceptionResponse> handleInvalidJwtAuthenticationException(Exception ex, WebRequest request){
+        ExceptionResponse exceptionResponse = new ExceptionResponse(new Date(), ex.getMessage(),request.getDescription(false));
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.FORBIDDEN);
     }
 }
