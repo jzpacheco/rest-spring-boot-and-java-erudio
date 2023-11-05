@@ -30,7 +30,8 @@ public class AuthServices {
 
     private Logger logger;
 
-    public ResponseEntity sigin(AccountCredentialsVO data){
+    @SuppressWarnings("rawtypes")
+    public ResponseEntity signin(AccountCredentialsVO data){
         try{
 
 
@@ -55,5 +56,20 @@ public class AuthServices {
         } catch (AuthenticationException e) {
             throw new BadCredentialsException("Invalid username/password supplied!");
         }
+    }
+    public ResponseEntity refreshToken(String username, String refreshToken ){
+            var user = userRepository.findByUsername(username);
+
+            var tokenResponse = new TokenVO();
+            if (user != null) {
+                tokenResponse = tokenProvider.refreshToken(refreshToken);
+
+                System.out.println("tokenResponse: "+tokenResponse);
+            }else {
+                throw new UsernameNotFoundException("Username: "+username+ " not found!");
+            }
+
+            return ResponseEntity.ok(tokenResponse);
+
     }
 }
