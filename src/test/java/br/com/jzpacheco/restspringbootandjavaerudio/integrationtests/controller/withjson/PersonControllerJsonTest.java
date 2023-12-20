@@ -2,7 +2,9 @@ package br.com.jzpacheco.restspringbootandjavaerudio.integrationtests.controller
 
 import br.com.jzpacheco.restspringbootandjavaerudio.configs.TestConfigs;
 import br.com.jzpacheco.restspringbootandjavaerudio.integrationtests.testcontainers.AbstractionIntegrationTest;
+import br.com.jzpacheco.restspringbootandjavaerudio.integrationtests.vo.AccountCredentialsVO;
 import br.com.jzpacheco.restspringbootandjavaerudio.integrationtests.vo.PersonVO;
+import br.com.jzpacheco.restspringbootandjavaerudio.integrationtests.vo.TokenVO;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.filter.log.RequestLoggingFilter;
@@ -41,27 +43,53 @@ public class PersonControllerJsonTest extends AbstractionIntegrationTest {
 
 
 	@Test
+	@Order(0)
+	public void authorization() throws IOException {
+
+		AccountCredentialsVO user= new AccountCredentialsVO("leandro", "admin123");
+
+		var accessToken = given()
+				.basePath("/auth/signin")
+					.port(TestConfigs.SERVER_PORT)
+					.contentType(TestConfigs.CONTENT_TYPE_JSON)
+				.body(user)
+					.when()
+				.post()
+				.then()
+					.statusCode(200)
+						.extract()
+							.body()
+							.as(TokenVO.class)
+					.getAccessToken();
+
+		System.out.println("acessToken Test: "+accessToken);
+
+		specification = new RequestSpecBuilder()
+				.addHeader(TestConfigs.HEADER_PARAM_AUTHORIZATION,"Bearer "+ accessToken)
+				.setBasePath("/api/person/v1")
+				.setPort(TestConfigs.SERVER_PORT)
+				.addFilter(new RequestLoggingFilter(LogDetail.ALL))
+				.addFilter(new ResponseLoggingFilter(LogDetail.ALL))
+				.build();
+
+	}
+
+	@Test
 	@Order(1)
 	public void testCreate() throws IOException {
 		mockPerson();
 
-		specification = new RequestSpecBuilder()
-				.addHeader(TestConfigs.HEADER_PARAM_ORIGIN,"http://localhost:8080")
-				.setBasePath("/api/person/v1")
-				.setPort(TestConfigs.SERVER_PORT)
-					.addFilter(new RequestLoggingFilter(LogDetail.ALL))
-					.addFilter(new ResponseLoggingFilter(LogDetail.ALL))
-				.build();
 		var content = given().spec(specification)
 				.contentType(TestConfigs.CONTENT_TYPE_JSON)
-					.body(person)
+				.header(TestConfigs.HEADER_PARAM_ORIGIN,"http://localhost:8080")
+				.body(person)
 				.when()
-					.post()
+				.post()
 				.then()
-					.statusCode(200)
+				.statusCode(200)
 				.extract()
-					.body()
-						.asString();
+				.body()
+				.asString();
 
 		PersonVO createdPerson = objectMapper.readValue(content, PersonVO.class);
 		//person = createdPerson;
