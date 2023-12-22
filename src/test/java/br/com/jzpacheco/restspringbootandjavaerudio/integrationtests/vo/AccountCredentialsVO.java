@@ -1,11 +1,15 @@
 package br.com.jzpacheco.restspringbootandjavaerudio.integrationtests.vo;
 
-import java.util.Objects;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
+import java.util.Objects;
+@XmlRootElement
 public class AccountCredentialsVO {
 
     private String username;
     private String password;
+
+    public AccountCredentialsVO(){}
 
     public AccountCredentialsVO(String username, String password) {
         this.username = username;
