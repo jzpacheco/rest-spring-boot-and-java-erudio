@@ -48,7 +48,12 @@ public class YMLMapper implements ObjectMapper {
     }
 
     @Override
-    public Object serialize(ObjectMapperSerializationContext objectMapperSerializationContext) {
+    public Object serialize(ObjectMapperSerializationContext context) {
+       try{
+           return objectMapper.writeValueAsString(context.getObjectToSerialize());
+       }catch (JsonProcessingException e){
+           e.printStackTrace();
+       }
         return null;
     }
 }
