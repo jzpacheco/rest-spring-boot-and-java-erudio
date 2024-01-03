@@ -69,8 +69,8 @@ public class AuthControllerYamlTest extends AbstractionIntegrationTest {
                 .body()
                 .as(TokenVO.class, objectMapper);
 
-        Assert.assertNotNull(tokenVO.getAccessToken());
-        Assert.assertNotNull(tokenVO.getRefreshToken());
+        assertNotNull(tokenVO.getAccessToken());
+        assertNotNull(tokenVO.getRefreshToken());
     }
 
     @Test
@@ -99,7 +99,7 @@ public class AuthControllerYamlTest extends AbstractionIntegrationTest {
                 .body()
                 .as(TokenVO.class, objectMapper);
 
-        Assert.assertNotNull(newTokenVO.getAccessToken());
-        Assert.assertNotNull(newTokenVO.getRefreshToken());
+        assertNotNull(newTokenVO.getAccessToken());
+        assertNotNull(newTokenVO.getRefreshToken());
     }
 }
